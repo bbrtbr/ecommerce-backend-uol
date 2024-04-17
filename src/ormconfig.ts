@@ -8,7 +8,7 @@ export const config: DataSourceOptions = {
     password: "XlTniJI4dxrpjx1WJeMTsoVjLYXt175C",
     database: "qdqzapnc",
     entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
-    migrations: ['src/migrations/*.ts'],
+    migrations: [__dirname + '/migrations/*.{.ts,.js}'],
     synchronize: true,
 };
 
