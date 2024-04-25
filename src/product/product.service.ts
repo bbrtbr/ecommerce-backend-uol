@@ -14,12 +14,32 @@ export class ProductService {
     return 'This action adds a new product';
   }
 
-  findAll() {
-    return this.productRepository.find();
+  async findAll(
+    page: number = 1,
+    pageSize: number = 10,
+    orderBy: string = 'default',
+    orderDirection: 'ASC' | 'DESC' = 'ASC',
+  ): Promise<Product[]> {
+    const skip = (page - 1) * pageSize;
+    let orderOptions = {};
+
+    if (orderBy != 'default') {
+      orderOptions = { [orderBy]: orderDirection };
+      return await this.productRepository.find({
+        skip,
+        take: pageSize,
+        order: orderOptions,
+      });
+    } else {
+      return await this.productRepository.find({
+        skip,
+        take: pageSize,
+      });
+    }
   }
 
   findOne(id: number) {
-    return this.productRepository.findOneBy({ id: id});
+    return this.productRepository.findOneBy({ id: id });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

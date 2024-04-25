@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Category } from '../../category/entities/category.entity';
 
 @Entity()
@@ -8,7 +16,7 @@ export class Product {
 
   @Column({ length: 50, nullable: false })
   name: string;
-
+  
   @Column({ length: 10, nullable: false })
   sku: string;
 
@@ -16,36 +24,33 @@ export class Product {
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  @Column({ type: 'int', nullable: false })
-  categoryId: number;
-
   @Column({ length: 250, nullable: false })
   description: string;
 
   @Column({ length: 500, nullable: false })
-  largeDescription: string;
+  large_description: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   price: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
-  discountPrice: number;
+  discount_price: number;
 
   @Column({ type: 'int', nullable: true })
-  discountPercent: number;
+  discount_percent: number;
 
   @Column({ default: false })
-  isNew: boolean;
+  is_new: boolean;
 
   @Column({ length: 250, nullable: true })
-  imageLink: string;
+  image_link: string;
 
   @Column({ length: 1000, nullable: true })
-  otherImagesLink: string;
+  other_images_link: string;
 
   @CreateDateColumn({ name: 'created_date' })
-  createdDate: Date;
+  create_date: Date;
 
   @UpdateDateColumn({ name: 'updated_date' })
-  updatedDate: Date;
+  updated_date: Date;
 }

@@ -12,8 +12,8 @@ export class Category {
   image_link: string;
 
   @CreateDateColumn({ name: 'created_date' })
-  createdDate: Date;
+  created_date: Date;
 
   @UpdateDateColumn({ name: 'updated_date' })
-  updatedDate: Date;
+  updated_date: Date;
 }
