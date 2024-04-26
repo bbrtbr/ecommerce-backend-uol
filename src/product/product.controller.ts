@@ -22,18 +22,18 @@ export class ProductController {
   }
 
   @Get()
-async findAll(
-  @Query('page') page: number = 1,
-  @Query('pageSize') pageSize?: number,
-  @Query('orderBy') orderBy: string = 'name',
-  @Query('orderDirection') orderDirection: 'ASC' | 'DESC' = 'ASC',
-): Promise<Product[]> {
-  if (!pageSize) {
-    pageSize = null;
+  async findAll(
+    @Query('page') page: number = 1,
+    @Query('pageSize') pageSize?: number,
+    @Query('orderBy') orderBy: string = 'name',
+    @Query('orderDirection') orderDirection: 'ASC' | 'DESC' = 'ASC',
+    @Query('categoryId') categoryId?: number,
+  ): Promise<Product[]> {
+    if (!pageSize) {
+      pageSize = null;
+    }
+    return this.productService.findAll(page, pageSize, orderBy, orderDirection, categoryId);
   }
-  return this.productService.findAll(page, pageSize, orderBy, orderDirection);
-}
-
 
   @Get(':id')
   findOne(@Param('id') id: string) {

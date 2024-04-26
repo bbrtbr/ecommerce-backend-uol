@@ -19,9 +19,15 @@ export class ProductService {
     pageSize: number = 10,
     orderBy: string = 'default',
     orderDirection: 'ASC' | 'DESC' = 'ASC',
+    categoryId?: number,
   ): Promise<Product[]> {
     const skip = (page - 1) * pageSize;
     let orderOptions = {};
+    let whereOptions = {};
+
+    if (categoryId && !isNaN(categoryId)) {
+      whereOptions = { category: { id: categoryId } };
+    }
 
     if (orderBy != 'default') {
       orderOptions = { [orderBy]: orderDirection };
@@ -29,11 +35,13 @@ export class ProductService {
         skip,
         take: pageSize,
         order: orderOptions,
+        where: whereOptions,
       });
     } else {
       return await this.productRepository.find({
         skip,
         take: pageSize,
+        where: whereOptions,
       });
     }
   }
